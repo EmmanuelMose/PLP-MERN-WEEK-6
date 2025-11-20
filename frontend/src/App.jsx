@@ -1,16 +1,16 @@
-import React, { lazy, Suspense } from "react";
-const BugForm = lazy(() => import("./components/BugForm/BugForm"));
-const BugList = lazy(() => import("./components/BugList/BugList"));
-import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
+import React from "react";
+import BugForm from "../../frontend/src/components/BugForm.jsx";
+import BugList from "../../frontend/src/components/BugList.jsx";
+import ErrorBoundary from "../../frontend/src/components/ErrorBoundary.jsx";
 
 function App() {
   return (
     <ErrorBoundary>
-      <Suspense fallback={<div>Loading...</div>}>
+      <div>
         <h1>Bug Tracker</h1>
         <BugForm onBugAdded={(bug) => console.log("New bug added", bug)} />
         <BugList />
-      </Suspense>
+      </div>
     </ErrorBoundary>
   );
 }

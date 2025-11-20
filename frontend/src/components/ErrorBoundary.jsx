@@ -1,5 +1,5 @@
 import React from "react";
-import "./ErrorBoundary.css"; // Import the CSS for ErrorBoundary
+import "./ErrorBoundary.css";
 
 export default class ErrorBoundary extends React.Component {
   state = { hasError: false };

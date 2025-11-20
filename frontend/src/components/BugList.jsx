@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { API } from "../api";
-import "./BugList.css"; // Import the CSS for BugList
+import { API } from "../../src/api"; // Adjust path if needed
+import "./BugList.css";
 
 export default function BugList() {
   const [bugs, setBugs] = useState([]);

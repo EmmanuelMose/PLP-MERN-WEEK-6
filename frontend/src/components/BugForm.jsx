@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { API } from "../api";
-import "./BugForm.css"; // Import the CSS for BugForm
+import { API } from "../../src/api"
+import "./BugForm.css";
 
 export default function BugForm({ onBugAdded }) {
   const [title, setTitle] = useState("");
@@ -10,6 +10,7 @@ export default function BugForm({ onBugAdded }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!title) return setError("Title is required");
+
     try {
       const res = await API.post("/bugs", { title, description });
       onBugAdded(res.data);
