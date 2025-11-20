@@ -21,10 +21,22 @@ app.use(cors());
 app.use(express.json());
 
 // --- Routes ---
-// Root route / health check
+// Root route with frontend link
 app.get("/", (req, res) => {
-  res.json({ message: "Backend is running!" });
+  res.send(`
+    <h1>Welcome to Bug Tracker Backend</h1>
+    <p>Frontend is live here: 
+      <a href="https://plp-mern-week-6.vercel.app" target="_blank" rel="noopener noreferrer">
+        Go to Bug Tracker Frontend
+      </a>
+    </p>
+    <p>API is available at /api/bugs</p>
+    <p>Health check: <a href="/api/health">/api/health</a></p>
+  `);
 });
+
+// Health check route
+app.get("/api/health", (req, res) => res.json({ status: "OK" }));
 
 // Bug routes
 app.use("/api/bugs", bugRoutes);
