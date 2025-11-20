@@ -10,26 +10,30 @@ dotenv.config();
 
 const app = express();
 
-// Security and JSON parsing
-app.use(cors());
+// --- Middleware ---
+// Security headers
 app.use(helmet());
+
+// Enable CORS
+app.use(cors());
+
+// Parse JSON requests
 app.use(express.json());
 
-// Routes
+// --- Routes ---
+// Root route / health check
+app.get("/", (req, res) => {
+  res.json({ message: "Backend is running!" });
+});
+
+// Bug routes
 app.use("/api/bugs", bugRoutes);
 
-// Health check endpoint
-app.get("/api/health", (req, res) => res.json({ status: "OK" }));
-
-// Error handling middleware
+// Error handling middleware (must be after routes)
 app.use(errorHandler);
 
-// MongoDB connection
-mongoose.connect(process.env.MONGO_URI, {
-  maxPoolSize: 10,             // connection pooling
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
+// --- MongoDB Connection ---
+mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     const PORT = process.env.PORT || 5000;
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
