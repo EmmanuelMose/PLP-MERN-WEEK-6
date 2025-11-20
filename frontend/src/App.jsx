@@ -1,16 +1,16 @@
-import BugForm from "./components/BugForm";
-import BugList from "./components/BugList";
-import ErrorBoundary from "./components/ErrorBoundary";
-import { useState } from "react";
+import React, { lazy, Suspense } from "react";
+const BugForm = lazy(() => import("./components/BugForm/BugForm"));
+const BugList = lazy(() => import("./components/BugList/BugList"));
+import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 
 function App() {
-  const [refresh, setRefresh] = useState(false);
-
   return (
     <ErrorBoundary>
-      <h1>Bug Tracker</h1>
-      <BugForm onBugAdded={() => setRefresh(!refresh)} />
-      <BugList key={refresh} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <h1>Bug Tracker</h1>
+        <BugForm onBugAdded={(bug) => console.log("New bug added", bug)} />
+        <BugList />
+      </Suspense>
     </ErrorBoundary>
   );
 }
