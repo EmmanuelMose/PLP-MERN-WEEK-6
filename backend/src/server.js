@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import helmet from "helmet";
 import bugRoutes from "./routes/bugRoutes.js";
-import { errorHandler } from "./middleware/errorMiddleware.js";
+import { errorHandler } from "./middlewares/errorMiddleware.js";
 
 dotenv.config();
 
